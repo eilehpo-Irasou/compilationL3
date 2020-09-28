@@ -6,7 +6,7 @@
 
 (define-empty-tokens Toks
   ;;ajouter les tokens
-  (AND OR NOT OPAR CPAR ASSIGN SEMICOL Eof))
+  (AND OR NOT OPAR CPAR ASSIGN SEMICOL Eof ADDITION SOUSTRACTION MULTIPLICATION DIVISION MODULO PUISSANCE))
 
 ;; les identifiants de tokens
 
@@ -21,14 +21,21 @@
   (lexer-src-pos
    ((eof) (token-Eof))
    (whitespace (tokenize input-port))
-   ("&&" (token-AND))
-   ("||" (token-OR))
-   ("!" (token-NOT))
-   ("(" (token-OPAR))
-   (")" (token-CPAR))
-   ("=" (token-ASSIGN))
-   (";" (token-SEMICOL))
-   ((:+ alphabetic) (token-Id lexeme))
+   ("&&" (token-AND)) ;et
+   ("||" (token-OR)) ; ou
+   ("!" (token-NOT)) ; non
+   ("(" (token-OPAR)) ; parenthese ouvrante
+   (")" (token-CPAR)) ; parenthèse fermée
+   ("=" (token-ASSIGN)) ; assigne
+   (";" (token-SEMICOL)) ; point virgule de fin
+   ("+" (token-ADDITION)) ; signe de l'addition
+   ("-" (token-SOUSTRACTION)) ; signe de la soustraction
+   ("*" (token-MULTIPLICATION)) ; signe de la multiplication
+   ("/" (token-DIVISION)) ; signe de la division
+   ("%" (token-MODULO)) ; signe du modulo
+   ("**" (token-PUISSANCE)); signe de puissance 
+   ((:+ alphabetic) (token-Id lexeme)) ; reconnaître l'alphabet
+   ((:+ numeric) (token-Id lexeme)) ; reconnaître les numéros/chiffres 
    ))
 
 
